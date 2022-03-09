@@ -59,4 +59,20 @@ router.delete('/:userId', async(req, res) => {
     }
 });
 
+//Update user by ID
+router.patch('/:userId', upload.single("userImage"), async(req, res) => {
+    const { name } = req.body;
+    try {
+        const updatedUser = await User.updateOne({ _id: req.params.userId }, {
+            $set: {
+                name: name,
+                userImage: req.file.path,
+            }
+        });
+        res.json(updatedUser);
+    } catch (error) {
+        res.json({ message: error });
+    }
+});
+
 module.exports = router;

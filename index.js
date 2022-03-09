@@ -18,7 +18,9 @@ app.use(express.json({ extended: false }));
 //Routes
 app.use('/user', userRoute);
 
-app.get('/', (req, res) => res.send('Du er på Home!'))
+app.get('/', (req, res) => {
+    res.sendFile('htmlFiles/index.html', { root: __dirname });
+});
 
 //Listen
 app.listen(port, () => console.log(`Server running on port ${port} ...`));
