@@ -1,11 +1,15 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const connectDB = require('./DB/connection');
 
 //Routes Import
 const userRoute = require('./routes/userRoute');
 
 const port = process.env.PORT || 3000;
+
+//Connect to Database
+connectDB();
 
 //Middleweares
 app.use(cors());
