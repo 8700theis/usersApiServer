@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User API Homepage</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>UserAPI school project - DOCS</h1>
+        <div class="request">
+            <div class="subheadingContainer">
+                <h2 class="requestHeading">GET</h2>
+                <h2 class="nameHeading">Get User</h2>
+            </div>
+            <p class="endpoint">http://localhost:3000/user</p>
+        </div>
+        
+        <div class="request">
+            <div class="subheadingContainer">
+                <h2 class="requestHeading">POST</h2>
+                <h2 class="nameHeading">Create User</h2>
+            </div>
+            <p class="endpoint">http://localhost:3000/user</p>
+            <div class="formdataContainer">
+                <div class="formdataHeading">
+                    <h2 class="body">Body</h2>
+                    <h2 class="formdataHeadingType">form-data</h2>
+                </div>
+                <div class="dataContainer">
+                    <div class="dataWrapper">
+                        <p class="dataName">name</p>
+                        <p class="dataValue">Theis Bo Nielsen</p>
+                    </div>
+                    <div class="dataWrapper">
+                        <p class="dataName">userImage</p>
+                        <p class="dataValue">/C:/Users/theis/Desktop/abe.jpg</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="request">
+            <div class="subheadingContainer">
+                <h2 class="requestHeading">DEL</h2>
+                <h2 class="nameHeading">Delete User</h2>
+            </div>
+            <p class="endpoint">http://localhost:3000/user/6228d6e58e1b10fd6cccccf5</p>
+        </div>
+
+        <div class="request">
+            <div class="subheadingContainer">
+                <h2 class="requestHeading">PATCH</h2>
+                <h2 class="nameHeading">Update User</h2>
+            </div>
+            <p class="endpoint">http://localhost:3000/user/6228d6e58e1b10fd6cccccf5?name=Theis&userImage</p>
+            <div class="formdataContainer">
+                <div class="formdataHeading">
+                    <h2 class="body">Request Params</h2>
+                </div>
+                <div class="dataContainer">
+                    <div class="dataWrapper">
+                        <p class="dataName">name</p>
+                        <p class="dataValue">Theis</p>
+                    </div>
+                    <div class="dataWrapper">
+                        <p class="dataName">userImage</p>
+                        <p class="dataValue"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="formdataContainer">
+                <div class="formdataHeading">
+                    <h2 class="body">Body</h2>
+                    <h2 class="formdataHeadingType">form-data</h2>
+                </div>
+                <div class="dataContainer">
+                    <div class="dataWrapper">
+                        <p class="dataName">name</p>
+                        <p class="dataValue">Theis</p>
+                    </div>
+                    <div class="dataWrapper">
+                        <p class="dataName">userImage</p>
+                        <p class="dataValue">/C:/Users/theis/Desktop/abe.jpg</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="https://documenter.getpostman.com/view/15662840/UVsFzp5f">Se Postman Docs</a>
+
+    </div>
+</body>
+
+</html>
