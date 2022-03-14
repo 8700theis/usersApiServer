@@ -35,15 +35,21 @@ router.get('/:userId', async(req, res) => {
 });
 
 //Create a user
-router.post('/', upload.single("userImage"), async(req, res) => {
+router.post('/', upload.single("userImage"), (req, res) => {
     const { name } = req.body;
     const userModel = new User({
         name: name,
         userImage: req.file.path,
     });
     try {
-        const savedUser = await userModel.save();
-        res.json(savedUser);
+        let usernameExists = User.findOne({ name: userModel.name }, (err, existingUser) => {
+            if (existingUser === null) {
+                const savedUser = userModel.save();
+                res.send({ message: 'Bruger er oprettet.' });
+            } else {
+                res.send({ message: 'Bruger med dette brugernavn eksistere allerede' });
+            }
+        });
     } catch (err) {
         res.json({ message: err });
     }
@@ -53,22 +59,22 @@ router.post('/', upload.single("userImage"), async(req, res) => {
 router.delete('/:userId', async(req, res) => {
     try {
         const removedUser = await User.deleteOne({ _id: req.params.userId });
-        res.json(removedUser);
+        res.send({ message: 'Bruger er slettet.' });
     } catch (error) {
         res.json({ message: err });
     }
 });
 
 //Update user by ID
-router.patch('/:userId', upload.single("userImage"), async(req, res) => {
+router.patch('/', upload.single("userImage"), async(req, res) => {
     const { name } = req.body;
     try {
-        const updatedUser = await User.updateOne({ _id: req.params.userId }, {
+        const updatedUser = await User.updateOne({ name: req.body.name }, {
             $set: {
                 name: name,
                 userImage: req.file.path,
             }
-        });
+        }, (err, ));
         res.json(updatedUser);
     } catch (error) {
         res.json({ message: error });
