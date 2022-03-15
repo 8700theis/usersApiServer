@@ -39,10 +39,10 @@ router.post('/', upload.single("userImage"), (req, res) => {
     const { name } = req.body;
     const userModel = new User({
         name: name,
-        userImage: req.file.path,
+        userImage: req.file.path
     });
     try {
-        let usernameExists = User.findOne({ name: userModel.name }, (err, existingUser) => {
+        let usernameExists = User.findOne({ name: name }, (err, existingUser) => {
             if (existingUser === null) {
                 const savedUser = userModel.save();
                 res.send({ message: 'Bruger er oprettet.' });
@@ -66,16 +66,15 @@ router.delete('/:userId', async(req, res) => {
 });
 
 //Update user by ID
-router.patch('/', upload.single("userImage"), async(req, res) => {
+router.patch('/:username', upload.single("userImage"), (req, res) => {
     const { name } = req.body;
     try {
-        const updatedUser = await User.updateOne({ name: req.body.name }, {
+        const updateUser = User.updateOne({ name: req.params.username }, {
             $set: {
                 name: name,
                 userImage: req.file.path,
             }
-        }, (err, ));
-        res.json(updatedUser);
+        });
     } catch (error) {
         res.json({ message: error });
     }
