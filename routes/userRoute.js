@@ -69,12 +69,22 @@ router.delete('/:userId', async(req, res) => {
 router.patch('/:username', upload.single("userImage"), (req, res) => {
     const { name } = req.body;
     try {
-        const updateUser = User.updateOne({ name: req.params.username }, {
-            $set: {
-                name: name,
-                userImage: req.file.path,
+        //Kig efter om det nye brugernavn eksisterer
+        const findUserName = User.findOne({ name: req.params.name }, (err, user) => {
+            if (user === null) {
+                const updateUser = User.updateOne({ name: req.params.username }, {
+                    $set: {
+                        name: name,
+                        userImage: req.file.path,
+                    }
+                }, (err, data) => {
+                    res.send({ message: 'Bruger opdateret.' });
+                });
+            } else {
+                res.send({ message: 'Brugernavnet eksistere allerede.' });
             }
         });
+
     } catch (error) {
         res.json({ message: error });
     }
